@@ -33,6 +33,19 @@ public class TraineeController {
         }
     }
 
+    // 수강생 전체 정보 조회
+    public List<Trainee> findAllTrainee(){
+        // DB에서 받아온 수강생 맵을 저장
+        Map<Integer, Trainee> traineeMap = repository.findAll();
+        // 수강생 맵의 값만 수강생 배열에 저장
+        List<Trainee> traineeList = new ArrayList<>();
+
+        for (Integer trNum : traineeMap.keySet()) {
+            traineeList.add(traineeMap.get(trNum));
+        }
+        return traineeList;
+    }
+
 
 
 

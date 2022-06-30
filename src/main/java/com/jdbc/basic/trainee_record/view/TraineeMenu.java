@@ -3,6 +3,7 @@ package com.jdbc.basic.trainee_record.view;
 import com.jdbc.basic.trainee_record.controller.TraineeController;
 import com.jdbc.basic.trainee_record.domain.Trainee;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class TraineeMenu {
@@ -34,7 +35,7 @@ public class TraineeMenu {
                     insertMenu();
                     break;
                 case 2:
-//                    findAllMenu();
+                    findAllMenu();
                     break;
                 case 3:
 //                    findOneMenu();
@@ -54,6 +55,19 @@ public class TraineeMenu {
 
             }
         }
+    }
+
+    // case 2 수강생 전체 조회
+    private void findAllMenu() {
+        List<Trainee> traineeList = controller.findAllTrainee();
+        System.out.println("\n==================== 전체 수강생 정보 ====================");
+        System.out.println("  ID     이름   성별   100m  1000m  sitUp  pushUp  오른손 왼손");
+        for (Trainee t : traineeList) {
+            System.out.printf("%4d %6s %4s %7.1f %5d  %5d  %5d  %5d %4d\n"
+                    , t.getTrNum(), t.getTrName(), t.getTrSex(), t.getRun100(), t.getRun1000(), t.getSitUp(), t.getPushUp(), t.getRightGrip(), t.getLeftGrip());
+        }
+        System.out.println();
+
     }
 
     //   case 1. 새 수강생 등록
