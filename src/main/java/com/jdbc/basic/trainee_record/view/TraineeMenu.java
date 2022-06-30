@@ -30,7 +30,7 @@ public class TraineeMenu {
 
             switch (menu) {
                 case 1:
-//                    insertMenu();
+                    insertMenu();
                     break;
                 case 2:
 //                    findAllMenu();
@@ -55,6 +55,13 @@ public class TraineeMenu {
         }
     }
 
+//   case 1. 새 수강생 등록
+    private void insertMenu() {
+        System.out.println("\n# 새 수강생을 등록합니다~");
+
+
+    }
+
     // 메세지 출력과 숫자 입력을 동시에
     private int inputNum(String msg) {
         int n;
@@ -69,6 +76,22 @@ public class TraineeMenu {
             }
         }
         return n;
+    }
+
+    // 메세지 출력과 문자열 입력을 동시에
+    private String inputStr(String msg) {
+        String s;
+        while (true) {
+            try {
+                System.out.print(msg);
+                s = sc.next();
+                break;
+            } catch (Exception e) {
+                sc.nextLine();
+                System.out.println("# 다시 입력해 주세요");
+            }
+        }
+        return s;
     }
 
 }
