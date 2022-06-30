@@ -22,6 +22,16 @@ public class TraineeController {
     }
 
     // 새 수강생 등록 기능
+    public boolean insertTrainee(Trainee trainee){
+        try {
+            traineeMap.put(trainee.getTrNum(), trainee);
+            return repository.save(trainee);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 
 
