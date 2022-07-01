@@ -1,5 +1,6 @@
 package com.jdbc.basic.trainee_record.controller;
 
+import com.jdbc.basic.score.domain.Score;
 import com.jdbc.basic.trainee_record.domain.Trainee;
 import com.jdbc.basic.trainee_record.repository.TraineeOracleRepo;
 import com.jdbc.basic.trainee_record.repository.TraineeRepository;
@@ -46,8 +47,25 @@ public class TraineeController {
         return traineeList;
     }
 
+    // 수강생 개별 정보 조회
+    public Trainee findOneTrainee(int trNum){
+        return repository.findOne(trNum);
+    }
 
+    // 수강생 정보 수정
+    public boolean modifyTrainee(Trainee t){
+        return repository.modifyInfo(t);
+    }
 
+    // 수강생 기록 갱신
+    public boolean updateTrainee(Trainee t){
+        return repository.updateRecord(t);
+    }
+
+    // 수강생 퇴원 처리(기록 삭제)
+    public boolean deleteTrainee(int trNum){
+        return repository.remove(trNum);
+    }
 
 
 

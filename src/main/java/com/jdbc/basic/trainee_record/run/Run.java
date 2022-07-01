@@ -7,5 +7,6 @@ public class Run {
 
         new TraineeMenu().mainManu();
 
+
     }
 }
