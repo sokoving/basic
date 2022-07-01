@@ -173,6 +173,7 @@ public class TraineeOracleRepo implements TraineeRepository {
         }
     }
 
+    // 아이디를 입력해 수강생을 리턴하는 메서드(못 찾으면 null 리턴)
     @Override
     public Trainee findOne(int trNum) {
 

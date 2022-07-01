@@ -23,7 +23,7 @@ public class Trainee {
 
 
     public static void printMenu(){
-        System.out.println("이름          (ID)   성별   100m  1000m  sitUp  pushUp  오른손 왼손");
+        System.out.println("[ ID ]    이름(성별)    100m  1000m  sitUp  pushUp  오른손  왼손");
     }
 
     public void printInfo(){
@@ -33,8 +33,8 @@ public class Trainee {
 
     @Override
     public String toString() {
-        return String.format("%-10s[%d] %4s %7.1f %5d  %5d  %5d  %5d %4d"
-                , trName, trNum, trSex, run100, run1000, sitUp, pushUp, rightGrip, leftGrip);
+        return String.format("[%4d] %-12s(%s) %7.1f %7d %5d %5d %5d %4d"
+                ,trNum, trName, trSex, run100, run1000, sitUp, pushUp, rightGrip, leftGrip);
 
     }
 }

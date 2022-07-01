@@ -47,7 +47,7 @@ public class TraineeController {
         return traineeList;
     }
 
-    // 수강생 개별 정보 조회
+    // 수강생 개별 정보 조회 (못 찾으면 null 리턴)
     public Trainee findOneTrainee(int trNum){
         return repository.findOne(trNum);
     }
