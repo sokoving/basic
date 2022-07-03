@@ -117,6 +117,9 @@ public class TraineeMenu {
     // case 3-2 수강생 개인정보 수정
     private void modifyMenu() {
 
+        // 9. 수정 종료 시 분기점
+        boolean flag = false;
+
         Trainee t = findOneMenu();
         if (t == null) return;
 
@@ -124,7 +127,7 @@ public class TraineeMenu {
             System.out.println("\n# 수정할 항목을 선택해 주세요");
             System.out.println("1. 이름");
             System.out.println("2. 성별");
-            System.out.println("9. 수정 종료");
+            System.out.println("9. 이전 메뉴로 돌아가기");
 
             int menu = inputNum(" >> ");
 
@@ -132,19 +135,24 @@ public class TraineeMenu {
                 case 1:
                     String name = inputStr(t.getTrName() + " >> ");
                     t.setTrName(name);
+                    flag = true;
                     break;
                 case 2:
                     String trSex = inputSex(t.getTrSex() + " >> ");
                     t.setTrSex(trSex);
+                    flag = true;
                     break;
                 case 9:
-                    boolean flag = controller.modifyTrainee(t);
+                    if(flag) {
+                        boolean result = controller.modifyTrainee(t);
 
-                    if (flag) {
-                        System.out.printf("- 정보가 수정되었습니다 > %s(%s)\n", t.getTrName(), t.getTrSex());
-                    } else {
-                        System.out.println("- 정보 수정에 실패했습니다.");
+                        if (result) {
+                            System.out.printf("- 정보가 수정되었습니다 > %s(%s)\n", t.getTrName(), t.getTrSex());
+                        } else {
+                            System.out.println("- 정보 수정에 실패했습니다.");
+                        }
                     }
+                    System.out.println("- 이전 메뉴로 돌아갑니다. ");
                     return;
                 default:
                     System.out.println("- 메뉴 번호를 입력해 주세요. ");
@@ -183,7 +191,7 @@ public class TraineeMenu {
 
     // caes 3-1-2 개별 기록 갱신하기
     private void updateEach(Trainee t) {
-
+        boolean flag = false;
         while (true) {
             System.out.println("\n1. 100m 달리기");
             System.out.println("2. 1000m 달리기");
@@ -199,34 +207,42 @@ public class TraineeMenu {
                 case 1:
                     double run100 = inputDouble("100m 달리기 : " + t.getRun100() + " >> ", 50);
                     t.setRun100(run100);
+                    flag = true;
                     break;
                 case 2:
                     int run1000 = inputNum("1000m 달리기 : " + t.getRun1000() + " >> ", 500);
                     t.setRun1000(run1000);
+                    flag = true;
                     break;
                 case 3:
                     int sitUp = inputNum("팔굽혀펴기 : " + t.getSitUp() + " >> ", 100);
                     t.setSitUp(sitUp);
+                    flag = true;
                     break;
                 case 4:
                     int pushUp = inputNum("윗몸일으키기 : " + t.getPushUp() + " >> ", 100);
                     t.setPushUp(pushUp);
+                    flag = true;
                     break;
                 case 5:
                     int rightGrip = inputNum("오른손 악력 : " + t.getRightGrip() + " >> ", 100);
                     t.setRightGrip(rightGrip);
+                    flag = true;
                     break;
                 case 6:
                     int leftGrip = inputNum("왼손 악력 : " + t.getLeftGrip() + " >> ", 100);
                     t.setLeftGrip(leftGrip);
+                    flag = true;
                     break;
                 case 9:
-                    boolean flag = controller.updateTrainee(t);
-
                     if (flag) {
-                        System.out.println("- 갱신이 완료되었습니다. ");
-                    } else {
-                        System.out.println("- 갱신에 실패하였습니다. ");
+                        boolean result = controller.updateTrainee(t);
+
+                        if (result) {
+                            System.out.println("- 갱신이 완료되었습니다. ");
+                        } else {
+                            System.out.println("- 갱신에 실패하였습니다. ");
+                        }
                     }
                     System.out.println("- 이전 메뉴로 돌아갑니다. ");
                     return;
@@ -249,9 +265,6 @@ public class TraineeMenu {
         int pushUp = inputNum("윗몸일으키기 : " + t.getPushUp() + " >> ", 100);
         int rightGrip = inputNum("오른손 악력 : " + t.getRightGrip() + " >> ", 100);
         int leftGrip = inputNum("왼손 악력 : " + t.getLeftGrip() + " >> ", 100);
-
-        System.out.println();
-        t.printInfo();
 
         while (true) {
             System.out.println("\n1. 갱신을 완료합니다. ");
@@ -300,7 +313,7 @@ public class TraineeMenu {
             switch (menu) {
                 case 1:
                     findAllMenu();
-                    return;
+                    break;
                 case 2:
                     Trainee t = findOneMenu();
                     if (t == null) break;
@@ -333,9 +346,9 @@ public class TraineeMenu {
     // 수강생 전체 조회
     private void findAllMenu() {
         List<Trainee> traineeList = controller.findAllTrainee();
-        for (int i = 0; i < traineeList.size() ; i++) {
-            if(i % 5 == 0){
-                System.out.printf("\n=================== 전체 수강생 정보(%d/%d) ===================\n", (i/5)+1, (traineeList.size()/5)+1);
+        for (int i = 0; i < traineeList.size(); i++) {
+            if (i % 5 == 0) {
+                System.out.printf("\n=================== 전체 수강생 정보(%d/%d) ===================\n", (i / 5) + 1, (traineeList.size() / 5) + 1);
                 Trainee.printMenu();
             }
             System.out.println(traineeList.get(i));
@@ -443,6 +456,7 @@ public class TraineeMenu {
         }
         return n;
     }
+
     private int inputNum(String msg) {
         int n;
         while (true) {
@@ -466,7 +480,7 @@ public class TraineeMenu {
             try {
                 System.out.print(msg);
                 s = sc.next();
-                if (s.length() <= 2 || s.length() > 5){
+                if (s.length() <= 2 || s.length() > 5) {
                     throw new Exception();
                 }
                 break;
