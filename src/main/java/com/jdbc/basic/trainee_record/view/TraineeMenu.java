@@ -301,7 +301,6 @@ public class TraineeMenu {
             switch (menu) {
                 case 1:
                     findAllMenu();
-                    break;
                 case 2:
                     Trainee t = findOneMenu();
                     if (t == null) break;
@@ -343,7 +342,7 @@ public class TraineeMenu {
         }
 
         while (true) {
-            System.out.println("1. 수강생 기록 관리 메뉴로 가기");
+            System.out.println("\n1. 수강생 기록 관리 메뉴로 가기");
             System.out.println("2. 이전 메뉴로 돌아가기");
 
             int menu = inputNum("\n >> ");

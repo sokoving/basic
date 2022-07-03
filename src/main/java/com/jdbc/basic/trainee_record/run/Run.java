@@ -7,9 +7,5 @@ public class Run {
 
         new TraineeMenu().mainManu();
 
-
-
-//        System.out.println("\n==================== 전체 수강생 정보 ====================");
-
     }
 }
