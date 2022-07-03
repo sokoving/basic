@@ -26,7 +26,7 @@ public class TraineeMenu {
             System.out.println("3. 수강생 관리");
             System.out.println("9. 끝내기");
 
-            int menu = inputNum("\n >> ");
+            int menu = inputNum(" >> ");
 
             switch (menu) {
                 case 1:
@@ -59,7 +59,7 @@ public class TraineeMenu {
             System.out.println("3. 수강생 퇴원 처리");
             System.out.println("9. 이전 메뉴로 돌아가기");
 
-            int menu = inputNum("\n >> ");
+            int menu = inputNum(" >> ");
 
             switch (menu) {
                 case 1:
@@ -88,12 +88,10 @@ public class TraineeMenu {
         Trainee t = findOneMenu();
         if (t == null) return;
 
-        t.printInfo();
-        System.out.println();
-        System.out.printf("1. %s(%d) 님을 퇴원 처리합니다. \n", t.getTrName(), t.getTrNum());
+        System.out.printf("\n1. %s(%d) 님을 퇴원 처리합니다. \n", t.getTrName(), t.getTrNum());
         System.out.println("2. 이전 메뉴로 돌아가기");
 
-        int menu = inputNum("\n >> ");
+        int menu = inputNum(" >> ");
 
         switch (menu) {
             case 1:
@@ -128,7 +126,7 @@ public class TraineeMenu {
             System.out.println("2. 성별");
             System.out.println("9. 수정 종료");
 
-            int menu = inputNum("\n >> ");
+            int menu = inputNum(" >> ");
 
             switch (menu) {
                 case 1:
@@ -164,7 +162,7 @@ public class TraineeMenu {
             System.out.println("2. 개별 항목 갱신");
             System.out.println("9. 이전 메뉴로 돌아가기");
 
-            int menu = inputNum("\n >> ");
+            int menu = inputNum(" >> ");
 
             switch (menu) {
                 case 1:
@@ -195,7 +193,7 @@ public class TraineeMenu {
             System.out.println("6. 왼손 악력");
             System.out.println("9. 이전 메뉴로 돌아가기");
 
-            int menu = inputNum("\n >> ");
+            int menu = inputNum(" >> ");
 
             switch (menu) {
                 case 1:
@@ -246,17 +244,11 @@ public class TraineeMenu {
 
         System.out.printf("\n# %s 님의 전체 기록을 갱신합니다. \n", t.getTrName());
         double run100 = inputDouble("100m 달리기 : " + t.getRun100() + " >> ", 50);
-        t.setRun100(run100);
         int run1000 = inputNum("1000m 달리기 : " + t.getRun1000() + " >> ", 500);
-        t.setRun1000(run1000);
         int sitUp = inputNum("팔굽혀펴기 : " + t.getSitUp() + " >> ", 100);
-        t.setSitUp(sitUp);
         int pushUp = inputNum("윗몸일으키기 : " + t.getPushUp() + " >> ", 100);
-        t.setPushUp(pushUp);
         int rightGrip = inputNum("오른손 악력 : " + t.getRightGrip() + " >> ", 100);
-        t.setRightGrip(rightGrip);
         int leftGrip = inputNum("왼손 악력 : " + t.getLeftGrip() + " >> ", 100);
-        t.setLeftGrip(leftGrip);
 
         System.out.println();
         t.printInfo();
@@ -265,23 +257,30 @@ public class TraineeMenu {
             System.out.println("\n1. 갱신을 완료합니다. ");
             System.out.println("2. 갱신을 취소합니다. ");
 
-            int menu = inputNum("\n >> ");
+            int menu = inputNum(" >> ");
 
             switch (menu) {
                 case 1:
+                    t.setRun100(run100);
+                    t.setRun1000(run1000);
+                    t.setSitUp(sitUp);
+                    t.setPushUp(pushUp);
+                    t.setRightGrip(rightGrip);
+                    t.setLeftGrip(leftGrip);
+
                     boolean flag = controller.updateTrainee(t);
 
                     if (flag) {
-                        System.out.println("갱신이 완료되었습니다. ");
+                        System.out.println("- 갱신이 완료되었습니다. ");
                     } else {
-                        System.out.println("갱신에 실패하였습니다. ");
+                        System.out.println("- 갱신에 실패하였습니다. ");
                     }
                     return;
                 case 2:
-                    System.out.println("갱신을 취소합니다. ");
+                    System.out.println("- 갱신을 취소합니다. ");
                     return;
                 default:
-                    System.out.println("1 또는 2를 입력해 주세요");
+                    System.out.println("- 1 또는 2를 입력해 주세요");
             }
         }
 
@@ -296,11 +295,12 @@ public class TraineeMenu {
             System.out.println("2. 개별 수강생 조회");
             System.out.println("9. 이전 메뉴로 돌아가기");
 
-            int menu = inputNum("\n >> ");
+            int menu = inputNum(" >> ");
 
             switch (menu) {
                 case 1:
                     findAllMenu();
+                    return;
                 case 2:
                     Trainee t = findOneMenu();
                     if (t == null) break;
@@ -319,7 +319,7 @@ public class TraineeMenu {
     private Trainee findOneMenu() {
 
         System.out.println("\n# 수강생 아이디를 입력하세요");
-        int trNum = inputNum("\n >> ");
+        int trNum = inputNum(" >> ");
         Trainee t = controller.findOneTrainee(trNum);
         if (t != null) {
             t.printInfo();
@@ -342,22 +342,20 @@ public class TraineeMenu {
         }
 
         while (true) {
-            System.out.println("\n1. 수강생 기록 관리 메뉴로 가기");
+            System.out.println("\n1. 수강생 관리 메뉴로 가기");
             System.out.println("2. 이전 메뉴로 돌아가기");
 
-            int menu = inputNum("\n >> ");
+            int menu = inputNum(" >> ");
 
             switch (menu) {
                 case 1:
-                    Trainee t = findOneMenu();
-                    if (t == null) break;
-                    updateMenu(t);
+                    manageMenu();
                     return;
                 case 2:
                     System.out.println("\n- 이전 메뉴로 돌아갑니다. ");
                     return;
                 default:
-                    System.out.println("1 또는 2를 입력해 주세요");
+                    System.out.println("- 1 또는 2를 입력해 주세요");
             }
         }
 
@@ -366,35 +364,60 @@ public class TraineeMenu {
 
     //----------------- case 1. 새 수강생 등록 -----------------------//
     private void insertMenu() {
-        System.out.println("\n# 새 수강생을 등록합니다.");
-        String name = inputStr("- 이름 : ");
-        String sex = inputSex("- 성별(M/F) : ");
 
-        System.out.println("\n# 체력 시험 결과를 입력해 주세요");
-        double run100 = inputDouble("- 100m 달리기(초) : ", 50);
-        int run1000 = inputNum("- 1000m 달리기(초) : ", 500);
-        int situp = inputNum("- 윗몸일으키기(회/1분) : ", 100);
-        int pushup = inputNum("- 팔굽혀펴기(회/1분) : ", 100);
-        int rightGrip = inputNum("- 오른손 악력(kg) : ", 100);
-        int leftGrip = inputNum("- 왼손 악력(kg) : ", 100);
+        while (true) {
+            System.out.println("\n# 새 수강생을 등록합니다.");
+            String name = inputStr("- 이름 : ");
+            String sex = inputSex("- 성별(M/F) : ");
 
-        Trainee newT = new Trainee();
-        newT.setTrName(name);
-        newT.setTrSex(sex);
-        newT.setRun100(run100);
-        newT.setRun1000(run1000);
-        newT.setSitUp(situp);
-        newT.setPushUp(pushup);
-        newT.setRightGrip(rightGrip);
-        newT.setLeftGrip(leftGrip);
+            System.out.println("\n# 체력 시험 결과를 입력해 주세요");
+            double run100 = inputDouble("- 100m 달리기(초) : ", 50);
+            int run1000 = inputNum("- 1000m 달리기(초) : ", 500);
+            int situp = inputNum("- 윗몸일으키기(회/1분) : ", 100);
+            int pushup = inputNum("- 팔굽혀펴기(회/1분) : ", 100);
+            int rightGrip = inputNum("- 오른손 악력(kg) : ", 100);
+            int leftGrip = inputNum("- 왼손 악력(kg) : ", 100);
 
-        boolean flag = controller.insertTrainee(newT);
+            Trainee newT = new Trainee();
+            newT.setTrName(name);
+            newT.setTrSex(sex);
+            newT.setRun100(run100);
+            newT.setRun1000(run1000);
+            newT.setSitUp(situp);
+            newT.setPushUp(pushup);
+            newT.setRightGrip(rightGrip);
+            newT.setLeftGrip(leftGrip);
 
-        if (flag) {
-            System.out.printf("\n- %s 님이 등록되었습니다.\n", name);
-        } else {
-            System.out.println("\n- 회원 등록에 실패했습니다. ");
+            System.out.println();
+            newT.printInfo();
+
+            System.out.printf("\n1. %s 님의 정보 등록하기 \n", name);
+            System.out.println("2. 다시 작성하기");
+            System.out.println("9. 메인 메뉴로 돌아가기");
+
+            int menu = inputNum(" >> ");
+
+            switch (menu) {
+                case 1:
+                    boolean flag = controller.insertTrainee(newT);
+                    if (flag) {
+                        System.out.printf("\n- %s 님이 등록되었습니다.\n", name);
+                    } else {
+                        System.out.println("\n- 회원 등록에 실패했습니다. ");
+                    }
+                    return;
+                case 2:
+                    break;
+                case 9:
+                    System.out.println("- 메인 메뉴로 돌아갑니다. ");
+                    return;
+                default:
+                    System.out.println("- 메뉴 번호를 입력해 주세요. ");
+
+            }
         }
+
+
     }
 
     //================ 입력기 ==================//
