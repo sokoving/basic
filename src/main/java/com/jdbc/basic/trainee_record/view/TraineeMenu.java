@@ -304,26 +304,21 @@ public class TraineeMenu {
     //----------------- case 2 수강생 조회 -----------------//
     private void findMenu() {
         while (true) {
-            System.out.println("\n1. 전체 수강생 조회");
-            System.out.println("2. 개별 수강생 조회");
-            System.out.println("9. 이전 메뉴로 돌아가기");
+            findAllMenu();
+            System.out.println("\n1. 수강생 관리 메뉴로 가기");
+            System.out.println("2. 이전 메뉴로 돌아가기");
 
             int menu = inputNum(" >> ");
 
             switch (menu) {
                 case 1:
-                    findAllMenu();
-                    break;
+                    manageMenu();
+                    return;
                 case 2:
-                    Trainee t = findOneMenu();
-                    if (t == null) break;
-                    updateMenu(t);
-                    break;
-                case 9:
-                    System.out.println("- 이전 메뉴로 돌아갑니다. ");
+                    System.out.println("\n- 이전 메뉴로 돌아갑니다. ");
                     return;
                 default:
-                    System.out.println("- 메뉴 번호를 입력해 주세요. ");
+                    System.out.println("- 1 또는 2를 입력해 주세요");
             }
         }
     }
@@ -331,9 +326,21 @@ public class TraineeMenu {
     // 수강생 개별 조회(찾으면 Trainee 정보를 출력하고 리턴, 못 찾으면 못 찾았다 출력하고 null 리턴)
     private Trainee findOneMenu() {
 
-        System.out.println("\n# 수강생 아이디를 입력하세요");
-        int trNum = inputNum(" >> ");
+        int trNum;
+        while (true) {
+            System.out.println("\n# 수강생 아이디를 입력하세요. (0을 입력하면 전체 수강생이 조회됩니다)");
+            trNum = inputNum(" >> ");
+            System.out.println();
+
+            if(trNum == 0) {
+                findAllMenu();
+                System.out.println();
+            } else {
+                break;
+            }
+        }
         Trainee t = controller.findOneTrainee(trNum);
+
         if (t != null) {
             t.printInfo();
         } else {
@@ -353,25 +360,6 @@ public class TraineeMenu {
             }
             System.out.println(traineeList.get(i));
         }
-
-        while (true) {
-            System.out.println("\n1. 수강생 관리 메뉴로 가기");
-            System.out.println("2. 이전 메뉴로 돌아가기");
-
-            int menu = inputNum(" >> ");
-
-            switch (menu) {
-                case 1:
-                    manageMenu();
-                    return;
-                case 2:
-                    System.out.println("\n- 이전 메뉴로 돌아갑니다. ");
-                    return;
-                default:
-                    System.out.println("- 1 또는 2를 입력해 주세요");
-            }
-        }
-
 
     }
 
@@ -480,7 +468,8 @@ public class TraineeMenu {
             try {
                 System.out.print(msg);
                 s = sc.next();
-                if (s.length() <= 2 || s.length() > 5) {
+
+                if (s.length() < 2 || s.length() > 5) {
                     throw new Exception();
                 }
                 break;
